@@ -163,6 +163,7 @@ const tpl = (book) => `<!DOCTYPE html>
 </footer>
 
 <script src="../assets/script.js"></script>
+<script src="../assets/accessibility.js"></script>
 </body>
 </html>
 `;

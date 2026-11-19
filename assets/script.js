@@ -56,10 +56,12 @@ if (toggle && links) {
   const openMenu = () => {
     links.classList.add('open');
     backdrop.classList.add('open');
+    document.body.classList.add('nav-open');
   };
   const closeMenu = () => {
     links.classList.remove('open');
     backdrop.classList.remove('open');
+    document.body.classList.remove('nav-open');
   };
   const toggleMenu = () => {
     links.classList.contains('open') ? closeMenu() : openMenu();
@@ -110,120 +112,6 @@ function handleSubmit(e){
   e.target.reset();
   setTimeout(() => { btn.textContent = 'שלח/י הודעה'; btn.style.background = ''; }, 4000);
 }
-
-// =========================================
-// ACCESSIBILITY WIDGET
-// =========================================
-(() => {
-  const STORAGE_KEY = 'mystory-a11y';
-  const state = {};
-  const FONT_SIZES = ['text-110', 'text-125', 'text-150'];
-
-  // Tool definitions with inline SVG icons
-  const tools = [
-    { id:'text-110', label:'טקסט גדול', svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2"/><path d="M9 5v14"/><path d="M15 5v14"/></svg>` },
-    { id:'text-125', label:'טקסט גדול יותר', svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V4h12v3"/><path d="M9 4v16"/><path d="M16 14v-3h6v3"/><path d="M19 11v9"/></svg>` },
-    { id:'text-150', label:'טקסט ענק', svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6V3h10v3"/><path d="M8 3v18"/><path d="M14 14v-3h7v3"/><path d="M17.5 11v10"/></svg>` },
-    { id:'contrast', label:'ניגודיות', svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20" fill="currentColor"/><path d="M12 2a10 10 0 0 1 0 20z" fill="currentColor"/></svg>` },
-    { id:'highlight-links', label:'הדגשת קישורים', svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>` },
-    { id:'no-animations', label:'ביטול הנפשות', svg:`<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>` },
-    { id:'grayscale', label:'גוון אפור', svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/></svg>` },
-    { id:'line-spacing', label:'מרווח שורה', svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18"/><path d="M3 12h18"/><path d="M3 19h18"/><path d="M7 9l-2-2-2 2"/><path d="M3 15l2 2 2-2"/></svg>` },
-    { id:'readable-font', label:'גופן קריא', svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>` },
-    { id:'big-cursor', label:'סמן גדול', svg:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-7 1-3 8z"/></svg>` }
-  ];
-
-  function load(){
-    try{
-      Object.assign(state, JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'));
-    } catch(e){}
-  }
-  function save(){
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
-  }
-  function apply(){
-    const html = document.documentElement;
-    Array.from(html.classList).forEach(c => {
-      if (c.startsWith('a11y-')) html.classList.remove(c);
-    });
-    Object.keys(state).forEach(id => {
-      if (state[id]) html.classList.add('a11y-' + id);
-    });
-    document.querySelectorAll('.a11y-tool').forEach(btn => {
-      btn.classList.toggle('active', !!state[btn.dataset.tool]);
-    });
-  }
-
-  function build(){
-    // Toggle button
-    const toggle = document.createElement('button');
-    toggle.className = 'a11y-toggle';
-    toggle.setAttribute('aria-label', 'תפריט נגישות');
-    toggle.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="3.5" r="2.2"/><path d="M20 9.5c0 .55-.45 1-1 1h-4v3l1.7 7.27c.13.54-.21 1.08-.75 1.21-.54.13-1.08-.21-1.21-.75L13 14.95l-1.74 6.28c-.13.54-.67.88-1.21.75-.54-.13-.88-.67-.75-1.21L11 13.5v-3H7c-.55 0-1-.45-1-1s.45-1 1-1h12c.55 0 1 .45 1 1z"/></svg>`;
-
-    // Panel
-    const panel = document.createElement('div');
-    panel.className = 'a11y-panel';
-    panel.innerHTML = `
-      <div class="a11y-header">
-        <h3>תפריט נגישות</h3>
-        <button class="a11y-close" aria-label="סגירה">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-      </div>
-      <div class="a11y-grid">
-        ${tools.map(t => `
-          <button class="a11y-tool" data-tool="${t.id}" type="button">
-            ${t.svg}
-            <span>${t.label}</span>
-          </button>
-        `).join('')}
-      </div>
-      <button class="a11y-reset" type="button">איפוס הגדרות</button>
-      <div class="a11y-footer">
-        <a href="accessibility.html">הצהרת נגישות</a>
-        <span aria-hidden="true">·</span>
-        <a href="privacy.html">מדיניות פרטיות</a>
-      </div>
-    `;
-
-    document.body.appendChild(toggle);
-    document.body.appendChild(panel);
-
-    toggle.addEventListener('click', () => panel.classList.toggle('open'));
-    panel.querySelector('.a11y-close').addEventListener('click', () => panel.classList.remove('open'));
-
-    panel.querySelectorAll('.a11y-tool').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.dataset.tool;
-        state[id] = !state[id];
-        // Mutually exclusive font sizes
-        if (state[id] && FONT_SIZES.includes(id)) {
-          FONT_SIZES.filter(f => f !== id).forEach(f => state[f] = false);
-        }
-        save();
-        apply();
-      });
-    });
-
-    panel.querySelector('.a11y-reset').addEventListener('click', () => {
-      Object.keys(state).forEach(k => state[k] = false);
-      save();
-      apply();
-    });
-
-    // Click outside to close
-    document.addEventListener('click', e => {
-      if (!panel.classList.contains('open')) return;
-      if (panel.contains(e.target) || toggle.contains(e.target)) return;
-      panel.classList.remove('open');
-    });
-  }
-
-  load();
-  build();
-  apply();
-})();
 
 // =========================================
 // BOOKS DROPDOWN — wraps the "ספרים" nav link with a dropdown
@@ -316,47 +204,4 @@ function handleSubmit(e){
     script.onload = populateMenu;
     document.head.appendChild(script);
   }
-})();
-
-// =========================================
-// COOKIE CONSENT BANNER
-// =========================================
-(() => {
-  const KEY = 'mystory-cookies';
-  let responded = null;
-  try{ responded = localStorage.getItem(KEY); } catch(e){}
-  if (responded) return; // already responded
-
-  const pathPrefix = /\/books\/[^/]+\.html$/.test(window.location.pathname) ? '../' : '';
-
-  const banner = document.createElement('div');
-  banner.className = 'cookie-banner';
-  banner.setAttribute('role', 'dialog');
-  banner.setAttribute('aria-label', 'הסכמה לשימוש בעוגיות');
-  banner.innerHTML = `
-    <div class="cookie-icon" aria-hidden="true">🍪</div>
-    <div class="cookie-content">
-      <h4>אנחנו משתמשים בעוגיות</h4>
-      <p>האתר משתמש בעוגיות על מנת לשפר את חוויית הגלישה ולשמור את העדפות הנגישות שלך. <a href="${pathPrefix}privacy.html">מדיניות פרטיות</a></p>
-    </div>
-    <div class="cookie-actions">
-      <button class="cookie-btn cookie-decline" type="button">דחייה</button>
-      <button class="cookie-btn cookie-accept" type="button">אישור</button>
-    </div>
-  `;
-  document.body.appendChild(banner);
-
-  // Animate in after a small delay
-  requestAnimationFrame(() => {
-    setTimeout(() => banner.classList.add('show'), 800);
-  });
-
-  const close = (value) => {
-    try{ localStorage.setItem(KEY, value); } catch(e){}
-    banner.classList.remove('show');
-    setTimeout(() => banner.remove(), 500);
-  };
-
-  banner.querySelector('.cookie-accept').addEventListener('click', () => close('accepted'));
-  banner.querySelector('.cookie-decline').addEventListener('click', () => close('declined'));
 })();
