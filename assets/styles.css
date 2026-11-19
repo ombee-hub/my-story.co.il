@@ -155,6 +155,11 @@ section{padding-block:var(--section)}
 .nav-links a.nav-cta:hover{background:var(--btn-hover); color:#fff}
 .nav-links a.nav-cta.active{color:#fff}
 .nav-links a.nav-cta.active::after{display:none}
+/* דסקטופ: כפתור יצירת קשר בקצה השמאלי של הסרגל */
+@media (min-width: 961px){
+  .nav-links{flex:1}
+  .nav-links a.nav-cta{margin-inline-start:auto}
+}
 
 /* ---------- BOOKS DROPDOWN ---------- */
 .nav-dropdown{
