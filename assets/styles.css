@@ -121,12 +121,6 @@ section{padding-block:var(--section)}
   display:flex; align-items:center; gap:28px;
   height:72px;
 }
-.nav-legal{
-  display:flex; flex-direction:column; gap:4px; flex:0 0 auto;
-  font-size:.78rem; line-height:1.2;
-}
-.nav-legal a{color:var(--muted); transition:color .2s}
-.nav-legal a:hover{color:var(--btn); text-decoration:underline; text-underline-offset:3px}
 .brand{
   display:flex; align-items:center; gap:14px; line-height:1;
 }
@@ -1109,7 +1103,8 @@ footer{
   opacity:.8;
   text-decoration:underline;
 }
-.foot-legal span{color:rgba(255,255,255,.5)}
+/* קו מפריד אנכי בין הקישורים (במקום הנקודה) */
+.foot-legal span{font-size:0; width:1px; height:14px; background:rgba(255,255,255,.45)}
 
 /* Legal pages (privacy, accessibility) */
 .legal{
@@ -1186,7 +1181,6 @@ footer{
   .foot-grid > div:nth-child(1){grid-area:brand}
   .foot-grid > div:nth-child(2){grid-area:nav}
   .foot-grid > div:nth-child(3){grid-area:contact}
-  .nav-legal{display:none}
 
   /* ==== SIDE PANEL — attached to edge ==== */
   .nav-links{
