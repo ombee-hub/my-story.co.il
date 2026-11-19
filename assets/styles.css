@@ -121,11 +121,12 @@ section{padding-block:var(--section)}
   display:flex; align-items:center; gap:28px;
   height:72px;
 }
-.nav-divider{
-  width:1px; height:36px;
-  background:rgba(31,29,26,.15);
-  flex:0 0 auto;
+.nav-legal{
+  display:flex; flex-direction:column; gap:4px; flex:0 0 auto;
+  font-size:.78rem; line-height:1.2;
 }
+.nav-legal a{color:var(--muted); transition:color .2s}
+.nav-legal a:hover{color:var(--btn); text-decoration:underline; text-underline-offset:3px}
 .brand{
   display:flex; align-items:center; gap:14px; line-height:1;
 }
@@ -1185,7 +1186,7 @@ footer{
   .foot-grid > div:nth-child(1){grid-area:brand}
   .foot-grid > div:nth-child(2){grid-area:nav}
   .foot-grid > div:nth-child(3){grid-area:contact}
-  .nav-divider{display:none}
+  .nav-legal{display:none}
 
   /* ==== SIDE PANEL — attached to edge ==== */
   .nav-links{
