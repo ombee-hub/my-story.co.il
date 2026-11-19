@@ -606,7 +606,7 @@ section{padding-block:var(--section)}
 .portrait{
   aspect-ratio: 3/4;
   border-radius:var(--radius-lg);
-  background-image:url('../images/Smader.png');
+  background-image:url('../images/Smader.webp');
   background-size:cover;
   background-position:center top;
   background-color:#E5D9BF;

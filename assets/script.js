@@ -26,7 +26,7 @@ if (toggle && links) {
   const brandHeader = document.createElement('div');
   brandHeader.className = 'nav-panel-brand';
   brandHeader.innerHTML = `
-    <img src="images/mystory-logo.png" alt="" />
+    <img src="images/mystory-logo.webp" alt="" />
     <div>
       <b>בשביל המילים</b>
       <span>סמדר ויצמן · סיפורולוגית</span>

@@ -17,8 +17,8 @@ const tpl = (book) => `<!DOCTYPE html>
 <title>${book.title} | בשביל המילים</title>
 <meta name="description" content="${book.title} — ${book.subtitle || ''}. סיפור חיים שכתבה סמדר ויצמן, סיפורולוגית." />
 
-<link rel="icon" type="image/png" href="../images/mystory-logo.png">
-<link rel="apple-touch-icon" href="../images/mystory-logo.png">
+<link rel="icon" type="image/png" href="../images/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,7 @@ const tpl = (book) => `<!DOCTYPE html>
 <header class="nav" id="nav">
   <div class="container nav-inner">
     <a href="../index.html" class="brand">
-      <img src="../images/mystory-logo.png" alt="בשביל המילים" class="brand-logo">
+      <img src="../images/mystory-logo.webp" alt="בשביל המילים" class="brand-logo">
       <span class="brand-text">
         <b>בשביל המילים</b>
         <span>סמדר ויצמן · סיפורולוגית</span>
@@ -64,7 +64,7 @@ const tpl = (book) => `<!DOCTYPE html>
 
       <div class="book-detail">
         <div class="book-cover-wrap reveal">
-          <div class="book-cover-large" style="background-image:url('${book.cover}')"></div>
+          <div class="book-cover-large" style="background-image:url('../${book.cover}')"></div>
         </div>
 
         <div class="book-info reveal">
@@ -110,7 +110,7 @@ const tpl = (book) => `<!DOCTYPE html>
     <div class="foot-grid">
       <div>
         <div class="foot-brand">
-          <img src="../images/mystory-logo.png" alt="בשביל המילים" class="foot-logo">
+          <img src="../images/mystory-logo.webp" alt="בשביל המילים" class="foot-logo">
           <div class="foot-brand-text">
             <h4>בשביל המילים</h4>
             <span>סמדר ויצמן · סיפורולוגית · כתיבת סיפורים</span>
@@ -156,7 +156,7 @@ const tpl = (book) => `<!DOCTYPE html>
       </div>
       <a href="https://ombee.co.il" target="_blank" rel="noopener" class="credit">
         <span>עיצוב ובנייה ע״י</span>
-        <img src="../images/ombee-logo.png" alt="OMBee" class="credit-logo">
+        <img src="../images/ombee-logo.webp" alt="OMBee" class="credit-logo">
       </a>
     </div>
   </div>
