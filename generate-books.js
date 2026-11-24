@@ -149,9 +149,9 @@ const tpl = (book) => `<!DOCTYPE html>
     <div class="container foot-bottom">
       <span>© 2026 כל הזכויות שמורות לשביל המילים</span>
       <div class="foot-legal">
-        <a href="../privacy.html">מדיניות פרטיות</a>
-        <span aria-hidden="true">·</span>
         <a href="../accessibility.html">הצהרת נגישות</a>
+        <span aria-hidden="true">·</span>
+        <a href="../privacy.html">מדיניות פרטיות</a>
       </div>
       <a href="https://ombee.co.il" target="_blank" rel="noopener" class="credit">
         <span>עיצוב ובנייה ע״י</span>
